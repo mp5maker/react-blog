@@ -1,12 +1,15 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faReact } from "@fortawesome/free-brands-svg-icons"
-import { faHome, faUser, faFile } from "@fortawesome/free-solid-svg-icons"
 import { Link } from 'gatsby'
+import { useTranslation } from 'react-i18next'
 
+import { Bubbles } from 'Components/Bubbles'
 import './styles.scss'
 
 export const Header = ({ title, page } = {}) => {
+    const { t } = useTranslation()
+
     return (
         <header className={`header-container`}>
             <div className={`header-content-left`}>
@@ -24,19 +27,28 @@ export const Header = ({ title, page } = {}) => {
             <div className="header-content-right">
                 <ul>
                     <li>
-                        <Link to={`/`}>
-                            <FontAwesomeIcon icon={faHome} />
+                        <Link
+                            activeClassName="active"
+                            to={`/`}>
+                            { t(`HOME`) }
                         </Link>
+                        <Bubbles />
                     </li>
                     <li>
-                        <Link to={`/about`}>
-                            <FontAwesomeIcon icon={faUser} />
+                        <Link
+                            activeClassName="active"
+                            to={`/about`}>
+                            { t(`ABOUT_ME`) }
                         </Link>
+                        <Bubbles />
                     </li>
                     <li>
-                        <Link to={`/my-files`}>
-                            <FontAwesomeIcon icon={faFile} />
+                        <Link
+                            activeClassName="active"
+                            to={`/my-files`}>
+                            { t(`FILES`) }
                         </Link>
+                        <Bubbles />
                     </li>
                 </ul>
             </div>

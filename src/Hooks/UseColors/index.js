@@ -1,8 +1,9 @@
 import * as React from 'react'
 
 import { Colors } from 'Constants/Colors'
+import { PURPLE } from 'Constants/Settings'
 
-export const useColors = ({ theme = 'light' } = {}) => {
+export const useColors = ({ theme = PURPLE } = {}) => {
     const root = React.useRef(document.documentElement).current
 
     React.useEffect(() => {
