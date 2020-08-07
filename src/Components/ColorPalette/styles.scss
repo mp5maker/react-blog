@@ -2,7 +2,45 @@
     position: fixed;
     bottom: 25px;
     right: 25px;
-    button {
-        margin-left: 12px;
+    padding: 12px;
+    background-color: var(--foreground-color);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    .color-palette-section {
+        width: 100%;
+        .button-section-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .button-section {
+                position: relative;
+                &:not(:first-child) {
+                    margin-left: 12px;
+                }
+                button {
+                    top: 0;
+                    transition: top 0.5s ease-in-out;
+                    position: relative;
+                    box-shadow: 0 1px 15px 0 var(--box-shadow-small-color);
+                }
+                &.active {
+                    button {
+                        box-shadow: 0 1px 15px 0 var(--box-shadow-medium-color);
+                        transition: top 0.5s ease-in-out;
+                        top: -30px;
+                        z-index: 1;
+                    }
+                }
+            }
+        }
+        .cut-out {
+            top: 0;
+            position: absolute;
+            clip-path: circle(40% at 50% 0%);
+            display: block;
+            height: calc(100% - 1px);
+            background-color: var(--background-color);
+            transition: left ease-in-out 0.25s;
+        }
     }
 }
