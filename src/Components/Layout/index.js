@@ -2,6 +2,7 @@ import React from "react"
 import { graphql, useStaticQuery } from 'gatsby'
 
 import { Header } from 'Components/Header'
+import { SEO } from 'Components/SEO'
 import { Footer } from 'Components/Footer'
 import { useColors } from 'Hooks/UseColors'
 import "./styles.scss"
@@ -23,6 +24,7 @@ export const Layout = ({ children, page = '' } = {}) => {
 
     return (
         <>
+            <SEO />
             <Header
                 page={page}
                 title={data.site.siteMetadata.title} />
