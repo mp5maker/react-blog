@@ -1,8 +1,8 @@
 import React from "react"
-import { graphql, useStaticQuery, Link } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 
 import { Layout } from 'Components/Layout'
-import { UserList } from 'Components/UserList'
+import { CardCollection } from 'Components/Card/Collection'
 
 export default function Home() {
   const data = useStaticQuery(
@@ -32,42 +32,7 @@ export default function Home() {
   return (
     <>
       <Layout page={`Home`}>
-        <div>
-            <p>
-              What a World.
-            </p>
-            <img
-              style={{
-                borderRadius: `5px`
-              }}
-              crossOrigin={`anonymous`}
-              src="https://source.unsplash.com/random/400x200"
-              alt="" />
-        </div>
-        <UserList />
-        <div>
-          <h4>
-            {data.allMarkdownRemark.totalCount} Posts
-          </h4>
-          {
-            data.allMarkdownRemark.edges.map(({ node }) => {
-              return (
-                <div key={node.id}>
-                  <h3>
-                    {node.frontmatter.title}{" "}
-                    <span>
-                      — {node.frontmatter.date}
-                    </span>
-                  </h3>
-                  <p>{node.excerpt}</p>
-                  <Link to={node.fields.slug}>
-                      Details
-                  </Link>
-                </div>
-              )
-            })
-          }
-        </div>
+        <CardCollection list={data.allMarkdownRemark.edges} />
       </Layout>
     </>
   )
