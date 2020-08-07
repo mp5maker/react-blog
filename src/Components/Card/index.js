@@ -5,9 +5,9 @@ import "./styles.scss"
 export const Card = ({ children }) => {
     return (
         <>
-            <div className="card-container">
+            <article className="card-container">
                 { children }
-            </div>
+            </article>
         </>
     )
 }

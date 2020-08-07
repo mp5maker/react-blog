@@ -37,14 +37,6 @@ export const Header = ({ title, page } = {}) => {
                     <li>
                         <Link
                             activeClassName="active"
-                            to={`/about`}>
-                            { t(`ABOUT_ME`) }
-                        </Link>
-                        <Bubbles />
-                    </li>
-                    <li>
-                        <Link
-                            activeClassName="active"
                             to={`/my-files`}>
                             { t(`FILES`) }
                         </Link>
