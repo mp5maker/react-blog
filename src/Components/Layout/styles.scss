@@ -1,0 +1,12 @@
+.layout-container {
+    .header-container {
+        margin-top: 12px;
+    }
+    .layout {
+        margin: 12px;
+        padding: 12px;
+        background-color: var(--foreground-color);
+        box-shadow: 0 1px 15px 0 var(--box-shadow-small-color);
+        border-radius: 5px;
+    }
+}

@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "Arigatou";
+    src: url("../Fonts/Arigatou.ttf");
+}
+
+@font-face {
+    font-family: "FiraSans";
+    src: url("../Fonts/FiraSans.ttf");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    font-family: "FiraSans", "Arigatou", sans-serif;
+    .container-fluid {
+        min-height: calc(100vh - 60px);
+        & ~ footer {
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        }
+    }
+}

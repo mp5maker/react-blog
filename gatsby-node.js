@@ -21,7 +21,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 edges {
                     node {
                         fields {
-                        slug
+                            slug
                         }
                     }
                 }
@@ -37,5 +37,13 @@ exports.createPages = async ({ graphql, actions }) => {
                 slug: node.fields.slug,
             },
         })
+    })
+}
+
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+    actions.setWebpackConfig({
+        resolve: {
+            modules: [path.resolve(__dirname, "src"), "node_modules"],
+        },
     })
 }
