@@ -5,4 +5,11 @@
     box-shadow: 0 1px 15px 0 var(--box-shadow-small-color);
     padding: 12px;
     border-radius: 5px;
+    a {
+        border-radius: 5px;
+        color: var(--primary-color);
+        background-color: var(--background-color);
+        padding: 12px;
+        box-shadow: 0 1px 15px 0 var(--box-shadow-small-color);
+    }
 }

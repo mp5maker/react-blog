@@ -1,12 +1,17 @@
 .header-container {
     position: relative;
-    margin: 12px;
-    padding: 12px;
+    padding: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--background-color);
     border-radius: 5px;
+    @media only screen and (max-width: 767px) {
+        padding: 12px;
+    }
+    @media only screen and (max-width: 500px) {
+        display: block;
+    }
     .header-content-left {
         .icon {
             display: inline-block;
@@ -58,7 +63,9 @@
             }
             @media only screen and (max-width: 767px) {
                 flex-wrap: wrap;
+                padding-left: 0;
                 li {
+                    margin-top: 12px;
                     min-height: 50px;
                 }
             }
