@@ -16,6 +16,9 @@ const Grid = styled.div`
     display: grid;
     grid-template-columns: auto 400px;
     grid-template-rows: auto;
+    @media only screen and (max-width: 767px) {
+        grid-template-columns: auto;
+    }
 `
 
 const Aside = styled.aside`
@@ -49,7 +52,7 @@ export const Layout = ({ children, page = '' } = {}) => {
                 <Grid className="container-fluid">
                     <main className="layout-container">
                         <div className={`layout`}>
-                            { children }
+                            {children}
                         </div>
                     </main>
                     <Aside>

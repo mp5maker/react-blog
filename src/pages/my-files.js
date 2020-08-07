@@ -1,61 +1,37 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import get from 'lodash/get'
 
 import { Layout } from 'Components/Layout'
+import { Table } from 'Components/Table'
 
 export default function MyFiles({ data }) {
     return (
         <>
             <Layout page={`My Site Files`}>
-                <table
-                    style={{
-                        tableLayout: `fixed`,
-                        width: `100%`
-                    }}>
-                    <thead>
-                        <tr>
-                            <th
-                                style={{ width: `25%` }}
-                                className={`text-left`}>
-                                Relative Path
-                            </th>
-                            <th style={{ width: `25%` }}
-                                className={`text-left`}>
-                                Pretty Size
-                            </th>
-                            <th style={{ width: `25%` }}
-                                className={`text-left`}>
-                                Extensions
-                            </th>
-                            <th style={{ width: `25%` }}
-                                className={`text-left`}>
-                                Birth Time
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            data.allFile.nodes.map((node, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td style={{ width: `25%` }}>
-                                            { node.relativePath }
-                                        </td>
-                                        <td style={{ width: `25%` }}>
-                                            { node.prettySize }
-                                        </td>
-                                        <td style={{ width: `25%` }}>
-                                            { node.extension }
-                                        </td>
-                                        <td style={{ width: `25%` }}>
-                                            { node.birthTime }
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
+                <Table
+                    list={data.allFile.nodes}
+                    properties={[
+                        'relativePath',
+                        'prettySize',
+                        'extension',
+                        'birthTime'
+                    ]}
+                    body={({ row, column }) => get(row, column, '')}
+                    header={({ column }) => {
+                        if (column === 'relativePath') return 'Relative Path'
+                        if (column === 'prettySize') return 'Pretty Size'
+                        if (column === 'extension') return 'Extension'
+                        if (column === 'birthTime') return 'Created'
+                        return
+                    }}
+                    tableWidth={{
+                        relativePath: `25%`,
+                        prettySize: `25%`,
+                        extension: `25%`,
+                        birthTime: `25%`,
+                    }}
+                />
             </Layout>
         </>
     )

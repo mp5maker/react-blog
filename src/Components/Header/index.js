@@ -42,6 +42,14 @@ export const Header = ({ title, page } = {}) => {
                         </Link>
                         <Bubbles />
                     </li>
+                    <li>
+                        <Link
+                            activeClassName="active"
+                            to={`/games`}>
+                            { t(`GAMES`) }
+                        </Link>
+                        <Bubbles />
+                    </li>
                 </ul>
             </div>
         </header>

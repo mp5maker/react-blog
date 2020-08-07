@@ -37,7 +37,7 @@ export const Bubbles = () => {
                 className="bubble-5"></div>
             <div
                 style={{
-                    right: Math.min(Math.floor(Math.random() * 30), 30),
+                    right: Math.min(Math.floor(Math.random() * -100), -30),
                     top: Math.min(Math.floor(Math.random() * 50), 50)
                 }}
                 className="bubble-6"></div>
@@ -49,7 +49,7 @@ export const Bubbles = () => {
                 className="bubble-7"></div>
             <div
                 style={{
-                    right: Math.min(Math.floor(Math.random() * 30), 30),
+                    right: Math.min(Math.floor(Math.random() * -100), -30),
                     bottom: Math.min(Math.floor(Math.random() * 50), 50)
                 }}
                 className="bubble-8"></div>

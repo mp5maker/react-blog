@@ -20,6 +20,11 @@
             display: inline-block;
             color: var(--primary-color);
         }
+        @media only screen and (max-width: 767px) {
+            h1, .icon {
+                font-size: 1.5rem;
+            }
+        }
     }
     .header-content-right {
         ul {
@@ -49,6 +54,12 @@
                     &:hover {
                         transform: scale(0.95);
                     }
+                }
+            }
+            @media only screen and (max-width: 767px) {
+                flex-wrap: wrap;
+                li {
+                    min-height: 50px;
                 }
             }
         }

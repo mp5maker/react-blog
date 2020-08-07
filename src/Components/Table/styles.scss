@@ -1,0 +1,43 @@
+.table-container {
+    table {
+        thead {
+            tr {
+                th {
+                    color: var(--primary-color);
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 1700px) {
+        table {
+            display: block;
+            thead {
+                display: none;
+            }
+            tbody {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-wrap: wrap;
+                tr {
+                    width: 300px;
+                    display: block;
+                    position: relative;
+                    margin: 12px;
+                    padding: 12px;
+                    box-shadow: 0 1px 15px 0 var(--box-shadow-small-color);
+                    td {
+                        font-size: 14px;
+                        width: unset !important;
+                        display: block;
+                        text-align: right;
+                        &::before {
+                            float: left !important;
+                            content: attr(data-header);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

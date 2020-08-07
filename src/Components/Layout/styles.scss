@@ -8,5 +8,9 @@
         background-color: var(--background-color);
         border-radius: 5px;
         min-height: 500px;
+        @media only screen and (max-width: 767px) {
+            margin: 0;
+            padding: 0;
+        }
     }
 }
