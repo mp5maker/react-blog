@@ -3,6 +3,8 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { I18nextProvider } from 'react-i18next';
 import styled from 'styled-components'
 
+import { ThemeContext } from 'Contexts/ThemeContext'
+import { ColorPalette } from 'Components/ColorPalette'
 import { PURPLE } from 'Constants/Settings'
 import { Header } from 'Components/Header'
 import { SEO } from 'Components/SEO'
@@ -28,7 +30,8 @@ const Aside = styled.aside`
 `
 
 export const Layout = ({ children, page = '' } = {}) => {
-    useColors({ theme: PURPLE })
+    const [theme, setTheme] = React.useState(PURPLE)
+    useColors({ theme })
 
     const data = useStaticQuery(
         graphql`
@@ -45,21 +48,24 @@ export const Layout = ({ children, page = '' } = {}) => {
     return (
         <>
             <I18nextProvider i18n={i18n}>
-                <SEO />
-                <Header
-                    page={page}
-                    title={data.site.siteMetadata.title} />
-                <Grid className="container-fluid">
-                    <main className="layout-container">
-                        <div className={`layout`}>
-                            {children}
-                        </div>
-                    </main>
-                    <Aside>
-                        <Me />
-                    </Aside>
-                </Grid>
-                <Footer />
+                <ThemeContext.Provider value={{ theme, setTheme }}>
+                    <SEO />
+                    <Header
+                        page={page}
+                        title={data.site.siteMetadata.title} />
+                    <Grid className="container-fluid">
+                        <main className="layout-container">
+                            <div className={`layout`}>
+                                {children}
+                            </div>
+                        </main>
+                        <Aside>
+                            <Me />
+                        </Aside>
+                    </Grid>
+                    <Footer />
+                    <ColorPalette />
+                </ThemeContext.Provider>
             </I18nextProvider>
         </>
     )
