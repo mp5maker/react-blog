@@ -2,15 +2,22 @@ import React from 'react'
 
 import { RoundButton } from 'Components/Button'
 import { ThemeContext } from 'Contexts/ThemeContext'
-import { LIGHT, DARK, PURPLE } from 'Constants/Settings'
+import { StorageSet } from 'Utilities/Storage'
+import { LIGHT, DARK, PURPLE, THEME } from 'Constants/Settings'
 import './styles.scss'
 
 const noOfButtons = 3
 
 export const ColorPalette = () => {
-    const [multiplier, setMultiplier] = React.useState(noOfButtons - 1)
     const { theme, setTheme } = React.useContext(ThemeContext)
+    const [multiplier, setMultiplier] = React.useState(null)
     const width = 100 / noOfButtons
+
+    React.useEffect(() => {
+        if (theme === LIGHT) setMultiplier(0)
+        if (theme === DARK) setMultiplier(1)
+        if (theme === PURPLE) setMultiplier(2)
+    }, [theme])
 
     let buttonRadius = multiplier === 0 ? { borderBottomLeftRadius: 20 } : {}
     buttonRadius = multiplier === 1 ? {} : buttonRadius
@@ -31,6 +38,7 @@ export const ColorPalette = () => {
                                 onClick={() => {
                                     setMultiplier(0)
                                     setTheme(LIGHT)
+                                    StorageSet({ key: THEME, value: LIGHT})
                                 }}>
                             </RoundButton>
                         </div>
@@ -44,6 +52,7 @@ export const ColorPalette = () => {
                                 onClick={() => {
                                     setMultiplier(1)
                                     setTheme(DARK)
+                                    StorageSet({ key: THEME, value: DARK })
                                 }}>
                             </RoundButton>
                         </div>
@@ -57,6 +66,7 @@ export const ColorPalette = () => {
                                 onClick={() => {
                                     setMultiplier(2)
                                     setTheme(PURPLE)
+                                    StorageSet({ key: THEME, value: PURPLE })
                                 }}>
                             </RoundButton>
                         </div>

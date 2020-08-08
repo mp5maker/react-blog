@@ -3,9 +3,10 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { I18nextProvider } from 'react-i18next';
 import styled from 'styled-components'
 
+import { StorageGet, StorageSet } from 'Utilities/Storage'
+import { THEME, LIGHT, DARK, PURPLE } from 'Constants/Settings'
 import { ThemeContext } from 'Contexts/ThemeContext'
 import { ColorPalette } from 'Components/ColorPalette'
-import { PURPLE } from 'Constants/Settings'
 import { Header } from 'Components/Header'
 import { SEO } from 'Components/SEO'
 import { Me } from 'Components/Me'
@@ -32,6 +33,23 @@ const Aside = styled.aside`
 export const Layout = ({ children, page = '' } = {}) => {
     const [theme, setTheme] = React.useState(PURPLE)
     useColors({ theme })
+
+    React.useEffect(() => {
+        const onSuccess = ([currentTheme]) => {
+            if (currentTheme === LIGHT
+                || currentTheme === DARK
+                || currentTheme === PURPLE) {
+                    setTheme(currentTheme)
+            } else {
+                setTheme(PURPLE)
+                StorageSet({ key: THEME, value: PURPLE })
+            }
+        }
+
+        Promise.all([
+            StorageGet({ key: THEME })
+        ]).then(onSuccess)
+    }, [])
 
     const data = useStaticQuery(
         graphql`
