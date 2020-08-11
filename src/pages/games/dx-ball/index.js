@@ -5,6 +5,7 @@ import { ThreeCanvas } from 'ThreeJS/Canvas'
 import { ThreeAmbientLight } from 'ThreeJS/Lights/Ambient'
 import { ThreePointLight } from 'ThreeJS/Lights/Point'
 import { ThreeBoxGeometry } from 'ThreeJS/Geometry/Box'
+import { ThreeMesh } from 'ThreeJS/Mesh'
 
 export default function DxBall() {
     return (
@@ -18,11 +19,11 @@ export default function DxBall() {
                     }}>
                     <ThreeAmbientLight />
                     <ThreePointLight position={[10, 10, 10]} />
-                    <mesh
+                    <ThreeMesh
                         position={[1.2, 0, 0]}>
                         <ThreeBoxGeometry args={[1, 1, 1]} />
                         <meshStandardMaterial attach="material" />
-                    </mesh>
+                    </ThreeMesh>
                 </ThreeCanvas>
             </Layout>
         </>
