@@ -4,7 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import styled from 'styled-components'
 
 import { StorageGet, StorageSet } from 'Utilities/Storage'
-import { THEME, LIGHT, DARK, PURPLE } from 'Constants/Settings'
+import { THEME, LIGHT, DARK, PURPLE, DEVELOPMENT } from 'Constants/Settings'
 import { ThemeContext } from 'Contexts/ThemeContext'
 import { ColorPalette } from 'Components/ColorPalette'
 import { Messenger } from 'Components/Messenger'
@@ -30,6 +30,8 @@ const Aside = styled.aside`
         display: none;
     }
 `
+
+const isDevelopment = process.env.NODE_ENV === DEVELOPMENT
 
 export const Layout = ({ children, page = '' } = {}) => {
     const [theme, setTheme] = React.useState(PURPLE)
@@ -84,7 +86,11 @@ export const Layout = ({ children, page = '' } = {}) => {
                     </Grid>
                     <Footer />
                     <ColorPalette />
-                    <Messenger />
+                    {
+                        !isDevelopment && (
+                            <Messenger />
+                        )
+                    }
                 </ThemeContext.Provider>
             </I18nextProvider>
         </>
