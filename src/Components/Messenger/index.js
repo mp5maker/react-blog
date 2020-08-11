@@ -12,7 +12,7 @@ export const Messenger = () => {
     const setFbAsyncInit = React.useCallback(() => {
         if (hasWindow) {
             window.fbAsyncInit = function () {
-                window.FB.init({
+                window.FB && window.FB.init({
                     xfbml: true,
                     version: 'v8.0'
                 });
