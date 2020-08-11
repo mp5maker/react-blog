@@ -1,14 +1,16 @@
 import React from 'react'
 
+const hasWindow = typeof window !== 'undefined'
+
 export const useScroll = () => {
     const [scroll, setScroll] = React.useState(0)
 
     React.useEffect(() => {
         const onWindowScroll = () => setScroll(window.scrollY)
 
-        if (window) window.addEventListener('scroll', onWindowScroll)
+        if (hasWindow) window.addEventListener('scroll', onWindowScroll)
         return () => {
-            if (window) window.removeEventListener('scroll', onWindowScroll)
+            if (hasWindow) window.removeEventListener('scroll', onWindowScroll)
         }
     }, [])
 

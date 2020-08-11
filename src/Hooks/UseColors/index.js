@@ -3,11 +3,11 @@ import * as React from 'react'
 import { Colors } from 'Constants/Colors'
 import { PURPLE } from 'Constants/Settings'
 
+const hasWindow = typeof window !== 'undefined'
+
 export const useColors = ({ theme = PURPLE } = {}) => {
     React.useEffect(() => {
-        if (typeof window === 'undefined' || !window.document) {
-            return;
-        } else {
+        if (hasWindow) {
             const root = document.documentElement
             root.style.setProperty('--background-color', Colors[theme].backgroundColor)
             root.style.setProperty('--foreground-color', Colors[theme].foregroundColor)

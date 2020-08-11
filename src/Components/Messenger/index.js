@@ -4,11 +4,13 @@ import { Colors } from 'Constants/Colors'
 import { ThemeContext } from 'Contexts/ThemeContext'
 import "./styles.scss"
 
+const hasWindow = typeof window !== 'undefined'
+
 export const Messenger = () => {
     const { theme } = React.useContext(ThemeContext)
 
     const setFbAsyncInit = React.useCallback(() => {
-        if (window) {
+        if (hasWindow) {
             window.fbAsyncInit = function () {
                 window.FB.init({
                     xfbml: true,
@@ -37,7 +39,7 @@ export const Messenger = () => {
         }
 
         removeElementByIds(['facebook-jssdk', 'fb-root'])
-        if (window) delete window.FB
+        if (hasWindow) delete window.FB
     }, [])
 
     const createMarkUp = React.useCallback(() => {
@@ -56,14 +58,14 @@ export const Messenger = () => {
     }, [theme])
 
     React.useEffect(() => {
-        if (window) {
+        if (hasWindow) {
             setFbAsyncInit()
             loadSDKAsynchronously()
             removeFacebookSDK()
         }
 
         return () => {
-            if (window && window.FB !== undefined) window.FB.CustomerChat.hide()
+            if (hasWindow && window.FB !== undefined) window.FB.CustomerChat.hide()
         }
     }, [setFbAsyncInit, theme, loadSDKAsynchronously, removeFacebookSDK])
 
