@@ -2,28 +2,36 @@ import React from "react"
 
 import { Layout } from 'Components/Layout'
 import { Animation } from 'Components/Animation'
-
+import { AnimationBall } from "Components/Animation/Ball"
+import { useDimension } from "Hooks/UseDimension"
+import { useMedia } from "Hooks/UseMedia"
 
 export default function Breakout() {
+    const { width, height } = useDimension()
+    const isWidthGreaterThan767 = useMedia("(min-width: 767px)")
+
     const onAnimation = React.useCallback(({ animation }) => {
+        const canvas = animation.getCanvas()
         const context = animation.getContext()
+        const ball = new AnimationBall({ canvas, context })
 
         const stage = function() {
-            context.beginPath();
-            context.rect(20, 40, 50, 50);
-            context.fillStyle = "#FF0000";
-            context.fill();
-            context.closePath()
+            animation.clear()
+            ball.move()
         }
 
         animation.setStage(stage)
+        ball.create()
         animation.start()
     }, [])
 
     return (
         <>
             <Layout page={`Games`}>
-                <Animation onAnimation={onAnimation} />
+                <Animation
+                    width={isWidthGreaterThan767 ? width * 0.7 * (3/5) : width * 0.9}
+                    height={height}
+                    onAnimation={onAnimation} />
             </Layout>
         </>
     )

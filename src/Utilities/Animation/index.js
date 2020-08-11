@@ -24,6 +24,11 @@ export class Animation {
         this.getCanvas = this.getCanvas.bind(this)
         this.getContext = this.getContext.bind(this)
         this.isPlaying = this.isPlaying.bind(this)
+        this.clear = this.clear.bind(this)
+    }
+
+    clear() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
 
     getContext() {
