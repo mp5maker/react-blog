@@ -38,7 +38,7 @@ ThreeCanvas.propTypes = {
     updateDefaultCamera: PropTypes.bool,
     onCreated: PropTypes.func,
     onPointerMissed: PropTypes.func,
-    antialias: PropTypes.bool,
+    antialias: PropTypes.any,
     alpha: PropTypes.bool,
     powerPreference: PropTypes.oneOf([
         'high-performance'
