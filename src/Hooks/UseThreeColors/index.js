@@ -7,7 +7,7 @@ import { ThemeContext } from 'Contexts/ThemeContext'
 
 export const useThreeColors = () => {
     const { theme } = React.useContext(ThemeContext)
-    const [colors, setColors] = React.useState(null)
+    const [colors, setColors] = React.useState()
 
     React.useEffect(() => {
         if (theme) {

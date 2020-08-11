@@ -1,14 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export const ThreeMesh = ({ children, ...props }) => {
+export const ThreeMesh = React.forwardRef((props, ref) => {
+    const { children, ...otherProps } = props
+
     return (
         <mesh
-            {...props}>
-            { children }
+            ref={ref}
+            {...otherProps}>
+            {children}
         </mesh>
     )
-}
+})
 
 ThreeMesh.propTypes = {
     onClick: PropTypes.func,
