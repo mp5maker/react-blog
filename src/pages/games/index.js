@@ -1,6 +1,7 @@
 import React from "react"
 import styled from 'styled-components'
 import { Link } from 'gatsby'
+import { Trans } from 'react-i18next'
 
 import { Layout } from 'Components/Layout'
 
@@ -35,20 +36,16 @@ export default function Home() {
             <Layout page={`Games`}>
                 <Grid>
                     <GridItem
-                        to={`/games/dx-ball`}>
-                        Dx Ball
+                        to={`/games/breakout`}>
+                        <Trans>
+                            BREAKOUT
+                        </Trans>
                     </GridItem>
                     <GridItem
                         to={`/games/dinasaur`}>
-                        Dinausaur
-                    </GridItem>
-                    <GridItem
-                        to={`/games/ultraman`}>
-                        Ultraman
-                    </GridItem>
-                    <GridItem
-                        to={`/games/lungi-maja`}>
-                        Lungi Maja
+                        <Trans>
+                            DINASAUR
+                        </Trans>
                     </GridItem>
                 </Grid>
             </Layout>

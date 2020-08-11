@@ -11,7 +11,7 @@ import { ThreeMesh } from 'ThreeJS/Mesh'
 import { ThreeMeshStandardMaterial } from 'ThreeJS/Material/Standard'
 
 
-export default function DxBall() {
+export default function Breakout() {
     // const colors = useThreeColors()
 
     return (
@@ -31,7 +31,7 @@ export default function DxBall() {
                         height: `100%`,
                         minHeight: `500px`
                     }}
-                    pixelRatio={window.devicePixelRatio || 1}>
+                    pixelRatio={typeof (window) != "undefined" ? window.devicePixelRatio : 1}>
                     <ThreeAmbientLight />
                     <ThreePointLight position={[10, 10, 10]} />
                     <ThreeMesh
