@@ -1,0 +1,14 @@
+#fb-root {
+    .fb-customerchat {
+        iframe {
+            bottom: 180px !important;
+        }
+    }
+    .fb_dialog {
+        .fb_dialog_content {
+            iframe {
+                bottom: 120px !important;
+            }
+        }
+    }
+}

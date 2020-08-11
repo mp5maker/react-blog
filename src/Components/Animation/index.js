@@ -11,7 +11,7 @@ export const Animation = ({ width = '99%', height = '100%', onAnimation }) => {
             if (onAnimation) onAnimation({ animation })
         }
 
-    }, [canvasRef])
+    }, [canvasRef, onAnimation])
 
     return (
         <canvas

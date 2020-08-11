@@ -7,6 +7,7 @@ import { StorageGet, StorageSet } from 'Utilities/Storage'
 import { THEME, LIGHT, DARK, PURPLE } from 'Constants/Settings'
 import { ThemeContext } from 'Contexts/ThemeContext'
 import { ColorPalette } from 'Components/ColorPalette'
+import { Messenger } from 'Components/Messenger'
 import { Header } from 'Components/Header'
 import { SEO } from 'Components/SEO'
 import { Me } from 'Components/Me'
@@ -83,6 +84,7 @@ export const Layout = ({ children, page = '' } = {}) => {
                     </Grid>
                     <Footer />
                     <ColorPalette />
+                    <Messenger />
                 </ThemeContext.Provider>
             </I18nextProvider>
         </>
