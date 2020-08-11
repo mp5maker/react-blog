@@ -3,8 +3,8 @@ export class AnimationBall {
         this.canvas = canvas
         this.context = context
         this.radius = radius
-        this.velocityX = 0.1
-        this.velocityY = 0.1
+        this.velocityX = 1
+        this.velocityY = 1
         this.color = color
         this.x = x
         this.y = y
@@ -18,6 +18,29 @@ export class AnimationBall {
         this.context.fill()
         this.context.closePath()
         this.context.restore()
+    }
+
+    detectCollision() {
+        /* Collide Ceil */
+        if ((this.y - this.radius) < 0) {
+            this.y = this.radius
+            this.velocityY = (-1) * this.velocityY
+        }
+        /* Collide Floor */
+        if ((this.y + this.radius) > this.canvas.height) {
+            this.y = this.canvas.height - this.radius
+            this.velocityY = (-1) * this.velocityY
+        }
+        /* Collide Left Wall */
+        if ((this.x - this.radius) < 0) {
+            this.x = this.radius
+            this.velocityX = (-1) * this.velocityX
+        }
+        /* Collide Right Wall */
+        if ((this.x + this.radius) > this.canvas.width) {
+            this.x = this.canvas.width - this.radius
+            this.velocityX = (-1) * this.velocityX
+        }
     }
 
     move() {

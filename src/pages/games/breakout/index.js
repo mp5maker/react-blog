@@ -18,6 +18,7 @@ export default function Breakout() {
         const stage = function() {
             animation.clear()
             ball.move()
+            ball.detectCollision()
         }
 
         animation.setStage(stage)
