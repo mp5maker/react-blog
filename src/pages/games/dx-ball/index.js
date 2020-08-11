@@ -1,6 +1,7 @@
 import React from "react"
 
 import { Layout } from 'Components/Layout'
+import { useThreeColors } from 'Hooks/UseThreeColors'
 import { ThreeCanvas } from 'ThreeJS/Canvas'
 import { ThreeAmbientLight } from 'ThreeJS/Lights/Ambient'
 import { ThreePointLight } from 'ThreeJS/Lights/Point'
@@ -8,7 +9,10 @@ import { ThreeBoxGeometry } from 'ThreeJS/Geometry/Box'
 import { ThreeMesh } from 'ThreeJS/Mesh'
 import { ThreeMeshStandardMaterial } from 'ThreeJS/Material/Standard'
 
+
 export default function DxBall() {
+    // const colors = useThreeColors()
+
     return (
         <>
             <Layout page={`Games`}>
