@@ -8,6 +8,10 @@ export class AnimationBall {
         this.color = color
         this.x = x
         this.y = y
+
+        this.create = this.create.bind(this)
+        this.detectCollision = this.detectCollision.bind(this)
+        this.move = this.move.bind(this)
     }
 
     create() {
