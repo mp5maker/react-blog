@@ -1,3 +1,5 @@
+const hasWindow = typeof(window) !== undefined
+
 export class AnimationPaddle {
     constructor({ canvas, context, color = 'pink', width = 100, height = 20 } = {}) {
         this.canvas = canvas
@@ -31,11 +33,11 @@ export class AnimationPaddle {
     }
 
     init() {
-        window.addEventListener('keydown', this.onKeyDown, false)
+        hasWindow && window.addEventListener('keydown', this.onKeyDown, false)
     }
 
     destroy() {
-        window.removeEventListener('keydown', this.onKeyDown, false)
+        hasWindow && window.removeEventListener('keydown', this.onKeyDown, false)
     }
 
     create() {
