@@ -17,6 +17,14 @@ export class AnimationPaddle {
         this.init = this.init.bind(this)
         this.destroy = this.destroy.bind(this)
         this.onKeyDown = this.onKeyDown.bind(this)
+        this.bounceOff = this.bounceOff.bind(this)
+    }
+
+    bounceOff({ x, y }) {
+        const withinVertical = y > this.y - this.height
+        const withinHorizontal = (x > this.x) && (x < (this.width + this.x))
+        if (withinVertical && withinHorizontal) return true
+        return false
     }
 
     onKeyDown(event) {

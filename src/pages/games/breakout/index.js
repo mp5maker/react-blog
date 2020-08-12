@@ -21,9 +21,19 @@ export default function Breakout() {
 
         const stage = function() {
             animation.clear()
+
             ball.move()
             ball.detectCollision()
             paddle.move()
+
+            /* Paddle It Off */
+            const { x: ballX, y: ballY } = ball.location()
+            const ballRequiredY = ballY - ball.getRadius()
+            const ballRequiredX = ballX
+            if (paddle.bounceOff({ x: ballRequiredX, y: ballRequiredY })) ball.reverseY()
+
+            /* Game Over */
+            if (ball.location().y > canvas.width) animation.stop()
         }
 
         animation.setStage(stage)
