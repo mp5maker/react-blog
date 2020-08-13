@@ -6,6 +6,8 @@ import { ThreeCarousel } from 'ThreeJS/Carousel'
 import { useDimension } from "Hooks/UseDimension"
 import { useMedia } from "Hooks/UseMedia"
 
+const hasWindow = typeof window !== 'undefined'
+
 export default function Models() {
     const { width, height } = useDimension()
     const isWidthGreaterThan767 = useMedia("(min-width: 767px)")
@@ -24,7 +26,7 @@ export default function Models() {
                         far: 1000,
                         position: [0, 5, 10]
                     }}
-                    pixelRatio={window.devicePixelRatio || 1}
+                    pixelRatio={hasWindow ? window.devicePixelRatio : 1}
                     antialias={`true`}>
                     <ThreeCarousel />
                 </ThreeCanvas>
