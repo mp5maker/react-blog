@@ -15,6 +15,7 @@ export class AnimationBall {
         this.move = this.move.bind(this)
         this.location = this.location.bind(this)
         this.reverseY = this.reverseY.bind(this)
+        this.reverseX = this.reverseX.bind(this)
         this.getRadius = this.getRadius.bind(this)
     }
 
@@ -41,6 +42,10 @@ export class AnimationBall {
 
     reverseY() {
         this.velocityY *= -1
+    }
+
+    reverseX() {
+        this.velocityX *= -1
     }
 
     detectCollision() {

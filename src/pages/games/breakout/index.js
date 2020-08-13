@@ -15,11 +15,14 @@ export default function Breakout() {
     const isWidthGreaterThan767 = useMedia("(min-width: 767px)")
 
     const onAnimation = React.useCallback(({ animation }) => {
+        /* Canvas and Context */
         const canvas = animation.getCanvas()
         const context = animation.getContext()
+        /* Objects */
         const ball = new AnimationBall({ canvas, context })
         const bricks = new AnimationBricks({ canvas, context })
         paddle = new AnimationPaddle({ canvas, context })
+        let points = 0;
 
         const stage = function() {
             animation.clear()
@@ -35,11 +38,37 @@ export default function Breakout() {
             const ballRequiredX = ballX
             if (paddle.bounceOff({ x: ballRequiredX, y: ballRequiredY })) ball.reverseY()
 
+            /* Destroy Bricks */
+            const { points: newPoints, allDestroyed } = bricks.detectCollision({
+                x: ballX,
+                y: ballY,
+                callback: () =>  {
+                    ball.reverseY()
+                    ball.reverseX()
+                }
+            })
+            if (newPoints) {
+                points += newPoints
+                console.log(points)
+            }
+
+            if (allDestroyed) {
+                console.log('Winner')
+                animation.stop()
+            }
+
             /* Game Over */
-            if (ball.location().y > canvas.width) animation.stop()
+            if (ball.location().y > canvas.width) {
+                console.log('Game Over')
+                points = 0
+                animation.stop()
+            }
         }
 
+        /* Animation Logic */
         animation.setStage(stage)
+
+        /* Initialization */
         ball.create()
         bricks.create()
         paddle.init()
