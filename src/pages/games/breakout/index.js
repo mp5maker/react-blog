@@ -4,6 +4,7 @@ import { Layout } from 'Components/Layout'
 import { Animation } from 'Components/Animation'
 import { AnimationBall } from "Utilities/Animation/Ball"
 import { AnimationPaddle } from "Utilities/Animation/Paddle"
+import { AnimationBricks } from "Utilities/Animation/Bricks"
 import { useDimension } from "Hooks/UseDimension"
 import { useMedia } from "Hooks/UseMedia"
 
@@ -17,6 +18,7 @@ export default function Breakout() {
         const canvas = animation.getCanvas()
         const context = animation.getContext()
         const ball = new AnimationBall({ canvas, context })
+        const bricks = new AnimationBricks({ canvas, context })
         paddle = new AnimationPaddle({ canvas, context })
 
         const stage = function() {
@@ -25,6 +27,7 @@ export default function Breakout() {
             ball.move()
             ball.detectCollision()
             paddle.move()
+            bricks.create()
 
             /* Paddle It Off */
             const { x: ballX, y: ballY } = ball.location()
@@ -38,6 +41,7 @@ export default function Breakout() {
 
         animation.setStage(stage)
         ball.create()
+        bricks.create()
         paddle.init()
         paddle.create()
         animation.start()

@@ -23,6 +23,7 @@
     "gatsby": "^2.24.26",
     "gatsby-plugin-manifest": "^2.4.22",
     "gatsby-plugin-react-helmet": "^3.3.10",
+    "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "gatsby-plugin-sass": "^2.3.12",
     "gatsby-plugin-styled-components": "^3.3.10",
     "gatsby-source-filesystem": "^2.3.24",
