@@ -50,6 +50,22 @@ export const Header = ({ title, page } = {}) => {
                         </Link>
                         <Bubbles />
                     </li>
+                    <li>
+                        <Link
+                            activeClassName="active"
+                            to={`/models`}>
+                            { t(`MODELS`) }
+                        </Link>
+                        <Bubbles />
+                    </li>
+                    <li>
+                        <Link
+                            activeClassName="active"
+                            to={`/arts-and-photography`}>
+                            {t(`ARTS_AND_PHOTOGRAPHY`)}
+                        </Link>
+                        <Bubbles />
+                    </li>
                 </ul>
             </div>
         </header>
