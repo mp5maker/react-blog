@@ -24,7 +24,7 @@ export default function Models() {
                         fov: 75,
                         near: 0.1,
                         far: 1000,
-                        position: [0, 5, 10]
+                        position: [0, 15, 20]
                     }}
                     pixelRatio={hasWindow ? window.devicePixelRatio : 1}
                     antialias={`true`}>

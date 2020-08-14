@@ -10,7 +10,7 @@ import { ThreeMeshStandardMaterial } from 'ThreeJS/Material/Standard'
 import { ThreeOrbitControls } from 'ThreeJS/Controls/Orbit'
 
 const numberOfItems = 5
-const radius = 5
+const radius = 12
 
 const Asset = ({ url, ...props }) => {
     const gltf = useLoader(GLTFLoader, url)
@@ -54,6 +54,19 @@ export const ThreeCarousel = () => {
                                                     position-z={radius * Math.sin(t)}
                                                     position-x={radius * Math.cos(t)}
                                                     url="/three-models/dog.glb" />
+                                            </React.Suspense>
+                                        </React.Fragment>
+                                    )
+                                }
+
+                                if (index === 1) {
+                                    return (
+                                        <React.Fragment key={index}>
+                                            <React.Suspense fallback={Box}>
+                                                <Asset
+                                                    position-z={radius * Math.sin(t)}
+                                                    position-x={radius * Math.cos(t)}
+                                                    url="/three-models/table.glb" />
                                             </React.Suspense>
                                         </React.Fragment>
                                     )
