@@ -1,0 +1,22 @@
+.cursor-outer {
+    position: fixed;
+    transition: all 0.1s linear;
+    border-radius: var(--cursor-outer-border-radius);
+    width: var(--cursor-outer-width);
+    height: var(--cursor-outer-height);
+    border: 1px solid var(--primary-color);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.cursor-inner {
+    position: fixed;
+    transition: all 0.15s linear;
+    border-radius: var(--cursor-inner-border-radius);
+    width: var(--cursor-inner-width);
+    height: var(--cursor-inner-height);
+    opacity: 0.3;
+    background-color: var(--primary-color);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}

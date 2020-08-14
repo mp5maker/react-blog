@@ -1,10 +1,10 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faReact } from "@fortawesome/free-brands-svg-icons"
-import { Link } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
 import { Bubbles } from 'Components/Bubbles'
+import { NavLink } from 'Components/NavLink'
 import './styles.scss'
 
 export const Header = ({ title, page } = {}) => {
@@ -27,43 +27,43 @@ export const Header = ({ title, page } = {}) => {
             <div className="header-content-right">
                 <ul>
                     <li>
-                        <Link
+                        <NavLink
                             activeClassName="active"
                             to={`/`}>
                             { t(`HOME`) }
-                        </Link>
+                        </NavLink>
                         <Bubbles />
                     </li>
                     <li>
-                        <Link
+                        <NavLink
                             activeClassName="active"
                             to={`/my-files`}>
                             { t(`FILES`) }
-                        </Link>
+                        </NavLink>
                         <Bubbles />
                     </li>
                     <li>
-                        <Link
+                        <NavLink
                             activeClassName="active"
                             to={`/games`}>
                             { t(`GAMES`) }
-                        </Link>
+                        </NavLink>
                         <Bubbles />
                     </li>
                     <li>
-                        <Link
+                        <NavLink
                             activeClassName="active"
                             to={`/models`}>
                             { t(`MODELS`) }
-                        </Link>
+                        </NavLink>
                         <Bubbles />
                     </li>
                     <li>
-                        <Link
+                        <NavLink
                             activeClassName="active"
                             to={`/arts-and-photography`}>
                             {t(`ARTS_AND_PHOTOGRAPHY`)}
-                        </Link>
+                        </NavLink>
                         <Bubbles />
                     </li>
                 </ul>

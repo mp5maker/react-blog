@@ -1,7 +1,8 @@
 import React from 'react'
-import { Card } from 'Components/Card'
 import moment from 'moment'
-import { Link } from 'gatsby'
+
+import { Card } from 'Components/Card'
+import { NavLink } from 'Components/NavLink'
 
 export const CardCollection = ({ list = [] }) => {
     return (
@@ -22,9 +23,11 @@ export const CardCollection = ({ list = [] }) => {
                                             </small>
                                         </p>
                                         <p>{node.excerpt}</p>
-                                        <Link to={node.fields.slug}>
+                                        <NavLink
+                                            borderRadius={`5px`}
+                                            to={node.fields.slug}>
                                             Details
-                                        </Link>
+                                        </NavLink>
                                     </div>
                                 </Card>
                             </React.Fragment>
