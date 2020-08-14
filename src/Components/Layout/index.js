@@ -2,15 +2,11 @@ import React from "react"
 import { graphql, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
 
-import { DEVELOPMENT } from 'Constants/Settings'
-import { ColorPalette } from 'Components/ColorPalette'
-import { Messenger } from 'Components/Messenger'
 import { Header } from 'Components/Header'
 import { SEO } from 'Components/SEO'
 import { Me } from 'Components/Me'
 import { Footer } from 'Components/Footer'
-import { MouseTracker } from 'Components/MouseTracker'
-import { VolumeControl } from 'Components/VolumeControl'
+
 import "./styles.scss"
 
 const Grid = styled.div`
@@ -27,8 +23,6 @@ const Aside = styled.aside`
         display: none;
     }
 `
-
-const isDevelopment = process.env.NODE_ENV === DEVELOPMENT
 
 export const Layout = ({ children, page = '' } = {}) => {
     const data = useStaticQuery(
@@ -60,14 +54,6 @@ export const Layout = ({ children, page = '' } = {}) => {
                 </Aside>
             </Grid>
             <Footer />
-            <ColorPalette />
-            {
-                !isDevelopment && (
-                    <Messenger />
-                )
-            }
-            <MouseTracker />
-            <VolumeControl />
         </>
     )
 }

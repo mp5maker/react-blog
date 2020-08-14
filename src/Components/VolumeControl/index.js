@@ -13,7 +13,7 @@ import './styles.scss'
 export const VolumeControl = () => {
     const { t } = useTranslation()
     const { sound, setSound } = React.useContext(SoundContext)
-    const [mute, setMute] = React.useState(sound)
+    const [mute, setMute] = React.useState(sound === ON ? false : true)
 
     const toggleMute = () => {
         if (mute) {
