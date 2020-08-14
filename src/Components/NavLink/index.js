@@ -1,12 +1,22 @@
 import React from 'react'
+import { Howl } from 'howler'
 import { Link } from 'gatsby'
 
 const hasWindow = typeof window !== undefined
 
-export const NavLink = ({ onMouseEnter, onMouseLeave, children, borderRadius, ...props } = {}) => {
+const mouseClickSound = new Howl({
+    src: '/sounds/mouse-click.mp3',
+});
+
+const mouseHoverSound = new Howl({
+    src: '/sounds/mouse-hover.mp3',
+});
+
+export const NavLink = ({ onMouseEnter, onMouseLeave, children, borderRadius, onClick, onKeyDown, ...props } = {}) => {
     const mouseEnter = React.useCallback((event) => {
         const { width, height } = event.target.getBoundingClientRect()
         if (hasWindow) {
+            mouseHoverSound.play()
             document.documentElement.style.setProperty('--cursor-inner-width', `${width}px`)
             document.documentElement.style.setProperty('--cursor-inner-height', `${height}px`)
             document.documentElement.style.setProperty('--cursor-inner-border-radius', `${borderRadius ? borderRadius : `20px`}`)
@@ -29,10 +39,21 @@ export const NavLink = ({ onMouseEnter, onMouseLeave, children, borderRadius, ..
         if (onMouseLeave) onMouseLeave(event)
     }, [onMouseLeave])
 
+    const onMouseClick = React.useCallback((event) => {
+        mouseClickSound.play()
+        if (onClick) onClick(event)
+    }, [onClick])
+
+    const handleKeyDown = React.useCallback((event) => {
+        if (onKeyDown) onKeyDown(event)
+    }, [onKeyDown])
+
     return props.href ? (
         <a
             role={`button`}
             tabIndex={0}
+            onKeyDown={handleKeyDown}
+            onClick={onMouseClick}
             onMouseEnter={mouseEnter}
             onMouseLeave={mouseLeave}
             {...props}>
@@ -40,6 +61,8 @@ export const NavLink = ({ onMouseEnter, onMouseLeave, children, borderRadius, ..
         </a>
     ) : (
         <Link
+            onKeyDown={handleKeyDown}
+            onClick={onMouseClick}
             onMouseEnter={mouseEnter}
             onMouseLeave={mouseLeave}
             {...props}>

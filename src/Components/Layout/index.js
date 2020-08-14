@@ -1,11 +1,8 @@
 import React from "react"
 import { graphql, useStaticQuery } from 'gatsby'
-import { I18nextProvider } from 'react-i18next';
 import styled from 'styled-components'
 
-import { StorageGet, StorageSet } from 'Utilities/Storage'
-import { THEME, LIGHT, DARK, PURPLE, DEVELOPMENT } from 'Constants/Settings'
-import { ThemeContext } from 'Contexts/ThemeContext'
+import { DEVELOPMENT } from 'Constants/Settings'
 import { ColorPalette } from 'Components/ColorPalette'
 import { Messenger } from 'Components/Messenger'
 import { Header } from 'Components/Header'
@@ -14,8 +11,6 @@ import { Me } from 'Components/Me'
 import { Footer } from 'Components/Footer'
 import { MouseTracker } from 'Components/MouseTracker'
 import { VolumeControl } from 'Components/VolumeControl'
-import { useColors } from 'Hooks/UseColors'
-import i18n from 'Locales/i18n'
 import "./styles.scss"
 
 const Grid = styled.div`
@@ -36,26 +31,6 @@ const Aside = styled.aside`
 const isDevelopment = process.env.NODE_ENV === DEVELOPMENT
 
 export const Layout = ({ children, page = '' } = {}) => {
-    const [theme, setTheme] = React.useState(PURPLE)
-    useColors({ theme })
-
-    React.useEffect(() => {
-        const onSuccess = ([currentTheme]) => {
-            if (currentTheme === LIGHT
-                || currentTheme === DARK
-                || currentTheme === PURPLE) {
-                    setTheme(currentTheme)
-            } else {
-                setTheme(PURPLE)
-                StorageSet({ key: THEME, value: PURPLE })
-            }
-        }
-
-        Promise.all([
-            StorageGet({ key: THEME })
-        ]).then(onSuccess)
-    }, [])
-
     const data = useStaticQuery(
         graphql`
             query {
@@ -70,33 +45,29 @@ export const Layout = ({ children, page = '' } = {}) => {
 
     return (
         <>
-            <I18nextProvider i18n={i18n}>
-                <ThemeContext.Provider value={{ theme, setTheme }}>
-                    <SEO />
-                    <Header
-                        page={page}
-                        title={data.site.siteMetadata.title} />
-                    <Grid className="container-fluid">
-                        <main className="layout-container">
-                            <div className={`layout`}>
-                                {children}
-                            </div>
-                        </main>
-                        <Aside>
-                            <Me />
-                        </Aside>
-                    </Grid>
-                    <Footer />
-                    <ColorPalette />
-                    {
-                        !isDevelopment && (
-                            <Messenger />
-                        )
-                    }
-                    <MouseTracker />
-                    <VolumeControl />
-                </ThemeContext.Provider>
-            </I18nextProvider>
+            <SEO />
+            <Header
+                page={page}
+                title={data.site.siteMetadata.title} />
+            <Grid className="container-fluid">
+                <main className="layout-container">
+                    <div className={`layout`}>
+                        {children}
+                    </div>
+                </main>
+                <Aside>
+                    <Me />
+                </Aside>
+            </Grid>
+            <Footer />
+            <ColorPalette />
+            {
+                !isDevelopment && (
+                    <Messenger />
+                )
+            }
+            <MouseTracker />
+            <VolumeControl />
         </>
     )
 }

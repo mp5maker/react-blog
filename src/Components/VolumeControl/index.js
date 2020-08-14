@@ -4,23 +4,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 
+import { ON, OFF } from 'Constants/Settings'
+import { SoundContext } from 'Contexts/SoundContext'
 import { RoundButton } from 'Components/Button'
 import { NavLink } from 'Components/NavLink'
 import './styles.scss'
 
 export const VolumeControl = () => {
     const { t } = useTranslation()
-    const [mute, setMute] = React.useState(true)
+    const { sound, setSound } = React.useContext(SoundContext)
+    const [mute, setMute] = React.useState(sound)
 
     const toggleMute = () => {
-        if (mute) Howler.mute(false)
-        else Howler.mute(true)
+        if (mute) {
+            Howler.mute(false)
+            setSound(ON)
+        } else {
+            Howler.mute(true)
+            setSound(OFF)
+        }
         setMute(!mute)
     }
 
     React.useEffect(() => {
-        Howler.mute(true)
-    }, [])
+        if (sound === ON) Howler.mute(false)
+        if (sound === OFF) Howler.mute(true)
+    }, [sound])
 
     return (
         <React.Fragment>
