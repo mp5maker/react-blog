@@ -31,15 +31,15 @@ export const Messenger = () => {
     }, [])
 
     const removeFacebookSDK = React.useCallback(() => {
-        // const removeElementByIds = (ids) => {
-        //     ids.forEach((id) => {
-        //         const element = document.getElementById(id)
-        //         if (element && element.parentNode) element.parentNode.removeChild(element)
-        //     })
-        // }
+        const removeElementByIds = (ids) => {
+            ids.forEach((id) => {
+                const element = document.getElementById(id)
+                if (element && element.parentNode) element.parentNode.removeChild(element)
+            })
+        }
 
-        // removeElementByIds(['facebook-jssdk', 'fb-root'])
-        // if (hasWindow) delete window.FB
+        removeElementByIds(['facebook-jssdk', 'fb-root'])
+        if (hasWindow) delete window.FB
     }, [])
 
     const createMarkUp = React.useCallback(() => {
@@ -61,7 +61,7 @@ export const Messenger = () => {
         if (hasWindow) {
             setFbAsyncInit()
             loadSDKAsynchronously()
-            // removeFacebookSDK()
+            removeFacebookSDK()
         }
 
         return () => {
