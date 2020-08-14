@@ -2,11 +2,9 @@ import React from "react"
 import { graphql, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
 
-import { DEVELOPMENT } from 'Constants/Settings'
 import { Header } from 'Components/Header'
 import { SEO } from 'Components/SEO'
 import { Me } from 'Components/Me'
-import { Messenger } from 'Components/Messenger'
 import { Footer } from 'Components/Footer'
 
 import "./styles.scss"
@@ -25,8 +23,6 @@ const Aside = styled.aside`
         display: none;
     }
 `
-
-const isDevelopment = process.env.NODE_ENV === DEVELOPMENT
 
 export const Layout = ({ children, page = '' } = {}) => {
     const data = useStaticQuery(
@@ -58,11 +54,6 @@ export const Layout = ({ children, page = '' } = {}) => {
                 </Aside>
             </Grid>
             <Footer />
-            {
-                !isDevelopment && (
-                    <Messenger />
-                )
-            }
         </>
     )
 }
