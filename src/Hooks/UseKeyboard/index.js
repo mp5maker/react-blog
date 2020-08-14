@@ -6,7 +6,7 @@ export const useKeyboard = () => {
     const [keyValue, setKeyValue] = React.useState('')
     const [keyCode, setKeyCode] = React.useState('')
 
-    React.useState(() => {
+    React.useEffect(() => {
         if (hasWindow) {
             const onWindowKeyDown = (event) => {
                 setKeyValue(event.key)
