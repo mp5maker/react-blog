@@ -29,12 +29,21 @@ export const NavLink = ({ onMouseEnter, onMouseLeave, children, borderRadius, ..
         if (onMouseLeave) onMouseLeave(event)
     }, [onMouseLeave])
 
-    return (
-        <Link
+    return props.href ? (
+        <a
+            role={`button`}
+            tabIndex={0}
             onMouseEnter={mouseEnter}
             onMouseLeave={mouseLeave}
             {...props}>
             { children }
+        </a>
+    ) : (
+        <Link
+            onMouseEnter={mouseEnter}
+            onMouseLeave={mouseLeave}
+            {...props}>
+            {children}
         </Link>
     )
 }

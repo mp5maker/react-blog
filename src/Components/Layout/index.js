@@ -13,6 +13,7 @@ import { SEO } from 'Components/SEO'
 import { Me } from 'Components/Me'
 import { Footer } from 'Components/Footer'
 import { MouseTracker } from 'Components/MouseTracker'
+import { VolumeControl } from 'Components/VolumeControl'
 import { useColors } from 'Hooks/UseColors'
 import i18n from 'Locales/i18n'
 import "./styles.scss"
@@ -93,6 +94,7 @@ export const Layout = ({ children, page = '' } = {}) => {
                         )
                     }
                     <MouseTracker />
+                    <VolumeControl />
                 </ThemeContext.Provider>
             </I18nextProvider>
         </>
