@@ -1,9 +1,9 @@
 import React from "react"
 import styled from 'styled-components'
-import { Link } from 'gatsby'
 import { Trans } from 'react-i18next'
 
 import { Layout } from 'Components/Layout'
+import { NavLink } from 'Components/NavLink'
 
 const Grid = styled.div`
     display: grid;
@@ -14,18 +14,21 @@ const Grid = styled.div`
 
 const GridItem = ({ to = '', children }) => {
     return (
-        <Link
+        <NavLink
+            borderRadius={`5px`}
             style={{
                 cursor: `pointer`,
                 display: `flex`,
                 justifyContent: `center`,
                 alignItems: `center`,
                 minHeight: `250px`,
+                textDecoration: `none`,
+                color: `var(--primary-color)`,
                 boxShadow: `0 1px 15px 0 var(--box-shadow-small-color)`
             }}
             to={to}>
             { children }
-        </Link>
+        </NavLink>
     )
 }
 
