@@ -76,12 +76,15 @@ export class Animation {
     }
 
     start() {
-        this.playing = true
         this.startTime = new Date().getTime()
         this.timeInterval = 0
         this.frame = 0
         this.lastTime = 0
         this.t = 0
+
+        if (this.animationFrame) window.cancelAnimationFrame(this.animationFrame)
+        if (this.playing === true) this.playing = false
+        this.playing = true
         this.animationFrame = window.requestAnimationFrame(this.animate)
     }
 

@@ -7,22 +7,40 @@ import { AnimationPaddle } from "Utilities/Animation/Paddle"
 import { AnimationBricks } from "Utilities/Animation/Bricks"
 import { useDimension } from "Hooks/UseDimension"
 import { useMedia } from "Hooks/UseMedia"
+import { useKeyboard } from "Hooks/UseKeyboard"
 
-let paddle = ''
-
+let points = 0;
 export default function Breakout() {
     const { width, height } = useDimension()
     const isWidthGreaterThan767 = useMedia("(min-width: 767px)")
+    const [anime, setAnime] = React.useState("")
+    const [animeBall, setAnimeBall] = React.useState("")
+    const [animePaddle, setAnimePaddle] = React.useState("")
+    const [animeBricks, setAnimeBricks] = React.useState("")
+    const { keyValue, keyCode } = useKeyboard()
+
+    React.useEffect(() => {
+        if (keyValue === 's' || keyCode === 83) {
+            points = 0;
+            if (animeBall) animeBall.restart()
+            if (animePaddle) animePaddle.restart()
+            if (animeBricks) animeBricks.restart()
+            if (anime) anime.start()
+        }
+    }, [anime, animeBall, animePaddle, animeBricks, keyValue, keyCode])
 
     const onAnimation = React.useCallback(({ animation }) => {
         /* Canvas and Context */
+        setAnime(animation)
         const canvas = animation.getCanvas()
         const context = animation.getContext()
         /* Objects */
         const ball = new AnimationBall({ canvas, context })
+        setAnimeBall(ball)
         const bricks = new AnimationBricks({ canvas, context })
-        paddle = new AnimationPaddle({ canvas, context })
-        let points = 0;
+        setAnimeBricks(bricks)
+        const paddle = new AnimationPaddle({ canvas, context })
+        setAnimePaddle(paddle)
 
         const stage = function() {
             animation.clear()
@@ -73,10 +91,7 @@ export default function Breakout() {
         bricks.create()
         paddle.init()
         paddle.create()
-        animation.start()
-    }, [])
 
-    React.useEffect(() => {
         return () => paddle && paddle.destroy()
     }, [])
 

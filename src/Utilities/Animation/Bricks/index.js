@@ -21,6 +21,13 @@ export class AnimationBricks {
 
         this.create = this.create.bind(this)
         this.detectCollision = this.detectCollision.bind(this)
+        this.restart = this.restart.bind(this)
+    }
+
+    restart() {
+        this.bricks = [...Array(this.brickRowCount)].map(() => Array(this.brickColumnCount).fill(
+            { x: 0, y: 0, status: ACTIVE }
+        ))
     }
 
     create() {

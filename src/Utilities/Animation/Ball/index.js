@@ -17,6 +17,14 @@ export class AnimationBall {
         this.reverseY = this.reverseY.bind(this)
         this.reverseX = this.reverseX.bind(this)
         this.getRadius = this.getRadius.bind(this)
+        this.restart = this.restart.bind(this)
+    }
+
+    restart({ x = 0, y = 0 } = {}) {
+        this.x = x
+        this.y = y
+        this.velocityX = 2
+        this.velocityY = 2
     }
 
     getRadius() {

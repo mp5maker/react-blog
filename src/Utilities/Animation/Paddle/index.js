@@ -18,6 +18,12 @@ export class AnimationPaddle {
         this.destroy = this.destroy.bind(this)
         this.onKeyDown = this.onKeyDown.bind(this)
         this.bounceOff = this.bounceOff.bind(this)
+        this.restart = this.restart.bind(this)
+    }
+
+    restart() {
+        this.x = this.canvas.width / 2
+        this.y = this.canvas.height - this.height
     }
 
     bounceOff({ x, y }) {
