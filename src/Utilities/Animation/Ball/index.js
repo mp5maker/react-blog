@@ -3,11 +3,11 @@ export class AnimationBall {
         this.canvas = canvas
         this.context = context
         this.radius = radius
-        this.velocityX = 2
-        this.velocityY = 2
+        this.velocityX = -2
+        this.velocityY = -2
         this.color = color
-        this.x = x
-        this.y = y
+        this.x = this.canvas.widht / 2
+        this.y = this.canvas.height - 100
         this.allowFloor = allowFloor
 
         this.create = this.create.bind(this)
@@ -20,11 +20,11 @@ export class AnimationBall {
         this.restart = this.restart.bind(this)
     }
 
-    restart({ x = 0, y = 0 } = {}) {
+    restart({ x = this.canvas.width / 2, y = this.canvas.height - 100 } = {}) {
         this.x = x
         this.y = y
-        this.velocityX = 2
-        this.velocityY = 2
+        this.velocityX = -2
+        this.velocityY = -2
     }
 
     getRadius() {

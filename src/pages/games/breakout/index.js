@@ -1,4 +1,5 @@
 import React from "react"
+import { Howl } from 'howler'
 
 import { Layout } from 'Components/Layout'
 import { Animation } from 'Components/Animation'
@@ -8,6 +9,10 @@ import { AnimationBricks } from "Utilities/Animation/Bricks"
 import { useDimension } from "Hooks/UseDimension"
 import { useMedia } from "Hooks/UseMedia"
 import { useKeyboard } from "Hooks/UseKeyboard"
+
+const gameOver = new Howl({
+    src: '/sounds/game_over.mp3'
+})
 
 let points = 0;
 export default function Breakout() {
@@ -79,6 +84,7 @@ export default function Breakout() {
             if (ball.location().y > canvas.width) {
                 console.log('Game Over')
                 points = 0
+                gameOver.play()
                 animation.stop()
             }
         }

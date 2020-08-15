@@ -1,5 +1,11 @@
+import { Howl } from 'howler'
+
 const ACTIVE = 1
 const INACTIVE = 0
+
+const bricksHit = new Howl({
+    src: '/sounds/bricks-hit.mp3'
+})
 
 export class AnimationBricks {
     constructor({ canvas, context, color = 'firebrick' } = {}) {
@@ -68,6 +74,7 @@ export class AnimationBricks {
                     const brickXLeft = brick.x
                     const brickXRight = brick.x + this.brickWidth
                     if (y >= brickYUpper && y <= brickYLower && x >= brickXLeft && x <= brickXRight) {
+                        bricksHit.play()
                         this.bricks[rowNo][columnNo] = { x: brick.x, y: brick.y, active: INACTIVE }
                         callback()
                         points++
