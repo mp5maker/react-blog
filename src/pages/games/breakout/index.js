@@ -14,6 +14,11 @@ const gameOver = new Howl({
     src: '/sounds/game_over.mp3'
 })
 
+const gameMusic = new Howl({
+    src: '/sounds/breakout-music.mp3',
+    loop: true
+})
+
 let points = 0;
 export default function Breakout() {
     const { width, height } = useDimension()
@@ -31,6 +36,8 @@ export default function Breakout() {
             if (animePaddle) animePaddle.restart()
             if (animeBricks) animeBricks.restart()
             if (anime) anime.start()
+            gameMusic.stop()
+            gameMusic.play()
         }
     }, [anime, animeBall, animePaddle, animeBricks, keyValue, keyCode])
 
@@ -86,6 +93,7 @@ export default function Breakout() {
                 points = 0
                 gameOver.play()
                 animation.stop()
+                gameMusic.stop()
             }
         }
 
@@ -100,7 +108,10 @@ export default function Breakout() {
     }, [])
 
     React.useEffect(() => {
-        return () => anime && anime.stop()
+        return () => {
+            anime && anime.stop()
+            gameMusic.stop()
+        }
     }, [anime])
 
     return (

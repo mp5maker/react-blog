@@ -1,4 +1,10 @@
+import { Howl } from 'howler'
+
 const hasWindow = typeof(window) !== undefined
+
+const paddleHit = new Howl({
+    src: '/sounds/paddle-hit.mp3'
+})
 
 export class AnimationPaddle {
     constructor({ canvas, context, color = 'pink', width = 100, height = 20 } = {}) {
@@ -29,7 +35,10 @@ export class AnimationPaddle {
     bounceOff({ x, y }) {
         const withinVertical = y > this.y - this.height
         const withinHorizontal = (x > this.x) && (x < (this.width + this.x))
-        if (withinVertical && withinHorizontal) return true
+        if (withinVertical && withinHorizontal) {
+            paddleHit.play()
+            return true
+        }
         return false
     }
 
