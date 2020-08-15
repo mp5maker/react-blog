@@ -97,9 +97,11 @@ export default function Breakout() {
         bricks.create()
         paddle.init()
         paddle.create()
-
-        return () => paddle && paddle.destroy()
     }, [])
+
+    React.useEffect(() => {
+        return () => anime && anime.stop()
+    }, [anime])
 
     return (
         <>

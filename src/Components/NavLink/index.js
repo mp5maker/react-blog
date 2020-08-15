@@ -12,30 +12,44 @@ const mouseHoverSound = new Howl({
     src: '/sounds/mouse-hover.mp3',
 });
 
+const customCursorSize = ({ borderRadius, width, height }) => {
+    document.documentElement.style.setProperty('--cursor-inner-width', `${width}px`)
+    document.documentElement.style.setProperty('--cursor-inner-height', `${height}px`)
+    document.documentElement.style.setProperty('--cursor-inner-border-radius', `${borderRadius ? borderRadius : `20px`}`)
+    document.documentElement.style.setProperty('--cursor-outer-width', `${width}px`)
+    document.documentElement.style.setProperty('--cursor-outer-height', `${height}px`)
+    document.documentElement.style.setProperty('--cursor-outer-border-radius', `${borderRadius ? borderRadius : `20px`}`)
+}
+
+
+const normalCursorSize = () => {
+    document.documentElement.style.setProperty('--cursor-inner-width', `10px`)
+    document.documentElement.style.setProperty('--cursor-inner-height', `10px`)
+    document.documentElement.style.setProperty('--cursor-inner-border-radius', `50%`)
+    document.documentElement.style.setProperty('--cursor-outer-width', `40px`)
+    document.documentElement.style.setProperty('--cursor-outer-height', `40px`)
+    document.documentElement.style.setProperty('--cursor-outer-border-radius', `50%`)
+    return
+}
+
+let timeout;
+
 export const NavLink = ({ onMouseEnter, onMouseLeave, children, borderRadius, onClick, onKeyDown, ...props } = {}) => {
     const mouseEnter = React.useCallback((event) => {
         const { width, height } = event.target.getBoundingClientRect()
         if (hasWindow) {
             mouseHoverSound.play()
-            document.documentElement.style.setProperty('--cursor-inner-width', `${width}px`)
-            document.documentElement.style.setProperty('--cursor-inner-height', `${height}px`)
-            document.documentElement.style.setProperty('--cursor-inner-border-radius', `${borderRadius ? borderRadius : `20px`}`)
-            document.documentElement.style.setProperty('--cursor-outer-width', `${width}px`)
-            document.documentElement.style.setProperty('--cursor-outer-height', `${height}px`)
-            document.documentElement.style.setProperty('--cursor-outer-border-radius', `${borderRadius ? borderRadius : `20px`}`)
+            if (timeout) clearTimeout(timeout)
+            customCursorSize({ borderRadius, width, height })
+            timeout = setTimeout(() => {
+                normalCursorSize()
+            }, 2000)
         }
         if (onMouseEnter) onMouseEnter(event)
     }, [onMouseEnter, borderRadius])
 
     const mouseLeave = React.useCallback((event) => {
-        if (hasWindow) {
-            document.documentElement.style.setProperty('--cursor-inner-width', `10px`)
-            document.documentElement.style.setProperty('--cursor-inner-height', `10px`)
-            document.documentElement.style.setProperty('--cursor-inner-border-radius', `50%`)
-            document.documentElement.style.setProperty('--cursor-outer-width', `40px`)
-            document.documentElement.style.setProperty('--cursor-outer-height', `40px`)
-            document.documentElement.style.setProperty('--cursor-outer-border-radius', `50%`)
-        }
+        if (hasWindow) normalCursorSize()
         if (onMouseLeave) onMouseLeave(event)
     }, [onMouseLeave])
 

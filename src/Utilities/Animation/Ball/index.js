@@ -1,3 +1,9 @@
+import { Howl } from 'howler'
+
+const ballBounce = new Howl({
+    src: '/sounds/ball-bounce.mp3'
+})
+
 export class AnimationBall {
     constructor({ canvas, context, radius = 10, x = 0, y = 0, color = 'red', allowFloor = false } = {}) {
         this.canvas = canvas
@@ -61,6 +67,7 @@ export class AnimationBall {
         if ((this.y - this.radius) < 0) {
             this.y = this.radius
             this.velocityY *= -1
+            ballBounce.play()
         }
 
         /* Collide Floor */
@@ -68,6 +75,7 @@ export class AnimationBall {
             if ((this.y + this.radius) > this.canvas.height) {
                 this.y = this.canvas.height - this.radius
                 this.velocityY *= -1
+                ballBounce.play()
             }
         }
 
@@ -75,12 +83,14 @@ export class AnimationBall {
         if ((this.x - this.radius) < 0) {
             this.x = this.radius
             this.velocityX *= -1
+            ballBounce.play()
         }
 
         /* Collide Right Wall */
         if ((this.x + this.radius) > this.canvas.width) {
             this.x = this.canvas.width - this.radius
             this.velocityX *= -1
+            ballBounce.play()
         }
     }
 
