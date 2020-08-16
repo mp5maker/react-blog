@@ -21,6 +21,14 @@ export class AnimationObstacles {
         this.play = this.play.bind(this)
         this.stop = this.stop.bind(this)
         this.isPlaying = this.isPlaying.bind(this)
+        this.detectCollision = this.detectCollision.bind(this)
+    }
+
+    detectCollision({ x, y }) {
+        const collisionX = (x >= this.x) && (x <= (this.x + this.width))
+        const collisionY = y >= (this.y - this.height)
+        if (collisionX && collisionY) return true
+        return false
     }
 
     isPlaying() {
@@ -36,9 +44,9 @@ export class AnimationObstacles {
     }
 
     restart() {
-        this.context.save()
-        this.context.drawImage(this.obstacles[0], this.canvas.width + 100, this.canvas.height / 2, this.width, this.height)
-        this.context.restore()
+        this.x = this.canvas.width + 100
+        this.y = this.canvas.height / 2
+        this.currentIndex = 0
     }
 
     create() {

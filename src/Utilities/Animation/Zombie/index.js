@@ -1,8 +1,17 @@
 import { LoadImages } from 'Utilities/LoadImages'
+import { Howl } from 'howler'
 
 const DEAD = 'dead'
 const IDLE = 'idle'
 const WALK = 'walk'
+
+const zombieJump = new Howl({
+    src: '/sounds/zombie-jump.mp3'
+})
+
+const zombieDead = new Howl({
+    src: '/sounds/zombie-dead.mp3'
+})
 
 export class AnimationZombie {
     constructor({ canvas, context, x, y }) {
@@ -41,6 +50,7 @@ export class AnimationZombie {
     }
 
     dead() {
+        zombieDead.play()
         this.currentIndex = 0
         this.currentState = DEAD
     }
@@ -48,10 +58,11 @@ export class AnimationZombie {
     jump() {
         let timeout = ''
         const currentY = this.y
-        const jumpUpTo20 = 150
+        const jumpUpTo20 = 200
         let jumpHeight = 0
 
         if (!this.busy) {
+            zombieJump.play()
             const smoothJump = () => {
                 this.busy = true
                 if (timeout) clearTimeout(timeout)

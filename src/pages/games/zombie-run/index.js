@@ -8,10 +8,7 @@ import { useMedia } from "Hooks/UseMedia"
 import { useKeyboard } from "Hooks/UseKeyboard"
 import { AnimationZombie } from "Utilities/Animation/Zombie"
 import { AnimationObstacles } from "Utilities/Animation/Obstacles"
-
-// const gameOver = new Howl({
-//     src: '/sounds/game_over.mp3'
-// })
+import { AnimationLine } from "Utilities/Animation/Line"
 
 const gameMusic = new Howl({
     src: '/sounds/breakout-music.mp3',
@@ -38,6 +35,9 @@ export default function Breakout() {
                 obs.restart()
                 obs.play()
             }
+            if (anime) {
+                anime.start()
+            }
             gameMusic.stop()
             gameMusic.play()
         }
@@ -54,27 +54,23 @@ export default function Breakout() {
         setZomb(zombie)
         const obstacles = new AnimationObstacles({ canvas, context })
         setObs(obstacles)
-
-        const line = () => {
-            context.save()
-            context.beginPath()
-            context.moveTo(0, (canvas.height / 2) + 80)
-            context.lineTo(canvas.width, (canvas.height / 2) + 80)
-            context.strokeStyle = 'orange'
-            context.stroke()
-            context.closePath()
-            context.restore()
-        }
+        const line = new AnimationLine({ canvas, context })
 
         const stage = function () {
             if (zombie.isLoaded()) {
                 animation.clear()
-                line()
+                line.create()
                 zombie.motion(animation.getFrame())
                 if (obstacles.isPlaying()) {
+                    const { x, y } = zombie.getPosition()
                     obstacles.move()
                     points++
-                    console.log(points)
+                    if (obstacles.detectCollision({ x, y })) {
+                        zombie.dead()
+                        obstacles.stop()
+                        animation.stop()
+                        gameMusic.stop()
+                    }
                 }
             }
         }
