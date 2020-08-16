@@ -72,7 +72,7 @@ export class Animation {
     }
 
     getFPS() {
-        return this.timeInterval > 0 ? this.timeInterval / 1000 : 0
+        return this.timeInterval > 0 ? 1000 / this.timeInterval : 0
     }
 
     start() {

@@ -45,9 +45,9 @@ export default function Home() {
                         </Trans>
                     </GridItem>
                     <GridItem
-                        to={`/games/dinasaur`}>
+                        to={`/games/zombie-run`}>
                         <Trans>
-                            DINASAUR
+                            ZOMBIE_RUN
                         </Trans>
                     </GridItem>
                 </Grid>

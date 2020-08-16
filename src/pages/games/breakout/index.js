@@ -116,7 +116,7 @@ export default function Breakout() {
 
     return (
         <>
-            <Layout page={`Games`}>
+            <Layout page={`Games: Breakout`}>
                 <Animation
                     width={isWidthGreaterThan767 ? width * 0.7 * (3/5) : width * 0.9}
                     height={height * 2 / 3}
