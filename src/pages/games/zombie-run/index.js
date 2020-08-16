@@ -7,6 +7,7 @@ import { useDimension } from "Hooks/UseDimension"
 import { useMedia } from "Hooks/UseMedia"
 import { useKeyboard } from "Hooks/UseKeyboard"
 import { AnimationZombie } from "Utilities/Animation/Zombie"
+import { AnimationObstacles } from "Utilities/Animation/Obstacles"
 
 // const gameOver = new Howl({
 //     src: '/sounds/game_over.mp3'
@@ -23,17 +24,25 @@ export default function Breakout() {
     const isWidthGreaterThan767 = useMedia("(min-width: 767px)")
     const [anime, setAnime] = React.useState("")
     const [zomb, setZomb] = React.useState("")
+    const [obs, setObs] = React.useState("")
     const { keyValue, keyCode } = useKeyboard()
 
     React.useEffect(() => {
         if (keyValue === 's' || keyCode === 83) {
             points = 0;
-            zomb && zomb.walk()
+            if (zomb) {
+                zomb.restart()
+                zomb.walk()
+            }
+            if (obs) {
+                obs.restart()
+                obs.play()
+            }
             gameMusic.stop()
             gameMusic.play()
         }
         if (keyValue === 'a' || keyCode === 65) zomb && zomb.jump()
-    }, [anime, zomb, keyValue, keyCode])
+    }, [anime, zomb, obs, keyValue, keyCode])
 
     const onAnimation = React.useCallback(({ animation }) => {
         /* Canvas and Context */
@@ -43,6 +52,8 @@ export default function Breakout() {
         /* Objects */
         const zombie = new AnimationZombie({ canvas, context })
         setZomb(zombie)
+        const obstacles = new AnimationObstacles({ canvas, context })
+        setObs(obstacles)
 
         const line = () => {
             context.save()
@@ -60,8 +71,11 @@ export default function Breakout() {
                 animation.clear()
                 line()
                 zombie.motion(animation.getFrame())
-                points++
-                console.log(points)
+                if (obstacles.isPlaying()) {
+                    obstacles.move()
+                    points++
+                    console.log(points)
+                }
             }
         }
 
@@ -70,6 +84,7 @@ export default function Breakout() {
         zombie.init().then(() => {
             zombie.create()
             animation.start()
+            obstacles.init()
         })
     }, [])
 

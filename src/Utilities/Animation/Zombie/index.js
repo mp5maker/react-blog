@@ -30,6 +30,14 @@ export class AnimationZombie {
         this.walk = this.walk.bind(this)
         this.jump = this.jump.bind(this)
         this.dead = this.dead.bind(this)
+        this.getPosition = this.getPosition.bind(this)
+    }
+
+    getPosition() {
+        return {
+            x: this.x,
+            y: this.y
+        }
     }
 
     dead() {
