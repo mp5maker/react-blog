@@ -28,9 +28,11 @@ export default function Breakout() {
     React.useEffect(() => {
         if (keyValue === 's' || keyCode === 83) {
             points = 0;
+            zomb && zomb.walk()
             gameMusic.stop()
             gameMusic.play()
         }
+        if (keyValue === 'a' || keyCode === 65) zomb && zomb.jump()
     }, [anime, zomb, keyValue, keyCode])
 
     const onAnimation = React.useCallback(({ animation }) => {
@@ -58,6 +60,8 @@ export default function Breakout() {
                 animation.clear()
                 line()
                 zombie.motion(animation.getFrame())
+                points++
+                console.log(points)
             }
         }
 

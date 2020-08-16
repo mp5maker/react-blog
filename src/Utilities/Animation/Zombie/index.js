@@ -17,14 +17,59 @@ export class AnimationZombie {
             idle: [],
             dead: []
         }
+        this.gravity = 0.3
         this.currentState = IDLE
         this.currentIndex = 0
         this.loaded = false
+        this.busy = false
 
         this.init = this.init.bind(this)
         this.create = this.create.bind(this)
         this.restart = this.restart.bind(this)
         this.isLoaded = this.isLoaded.bind(this)
+        this.walk = this.walk.bind(this)
+        this.jump = this.jump.bind(this)
+        this.dead = this.dead.bind(this)
+    }
+
+    dead() {
+        this.currentIndex = 0
+        this.currentState = DEAD
+    }
+
+    jump() {
+        let timeout = ''
+        const currentY = this.y
+        const jumpUpTo20 = 150
+        let jumpHeight = 0
+
+        if (!this.busy) {
+            const smoothJump = () => {
+                this.busy = true
+                if (timeout) clearTimeout(timeout)
+                timeout = setTimeout(() => {
+                    if (jumpHeight === jumpUpTo20) {
+                        this.y += (1 + this.gravity)
+                        if (this.y >= currentY) {
+                            this.y = currentY
+                            this.busy = false
+                            return
+                        }
+                        smoothJump()
+                    } else {
+                        this.y -= (1 - this.gravity)
+                        jumpHeight++
+                        smoothJump()
+                    }
+                }, 1)
+            }
+            smoothJump()
+        }
+    }
+
+    walk() {
+        this.currentIndex = 0
+        this.currentState = WALK
     }
 
     isLoaded() {
@@ -46,7 +91,7 @@ export class AnimationZombie {
     }
 
     motion(frame = 4) {
-        if (frame % 4 == 0) {
+        if (frame % 4 === 0) {
             const currentStateLength = this.zombie[this.currentState].length
             this.currentIndex++
             if  (this.currentIndex >= currentStateLength) this.currentIndex = 0
