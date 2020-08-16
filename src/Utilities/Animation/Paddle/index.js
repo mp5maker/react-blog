@@ -1,5 +1,7 @@
 import { Howl } from 'howler'
 
+import { Lerp } from 'Utilities/Lerp'
+
 const hasWindow = typeof(window) !== undefined
 
 const paddleHit = new Howl({
@@ -13,9 +15,10 @@ export class AnimationPaddle {
         this.color = color
         this.width = width
         this.height = height
-        this.x = this.canvas.width / 2
+        this.x = this.canvas.width / 2 - (this.width / 2)
         this.y = this.canvas.height - this.height
         this.horizontalVelocity = 25
+        this.timeout = ""
 
         this.create = this.create.bind(this)
         this.detectCollision = this.detectCollision.bind(this)
@@ -28,7 +31,7 @@ export class AnimationPaddle {
     }
 
     restart() {
-        this.x = this.canvas.width / 2
+        this.x = this.canvas.width / 2 - (this.width / 2)
         this.y = this.canvas.height - this.height
     }
 
@@ -44,13 +47,37 @@ export class AnimationPaddle {
 
     onKeyDown(event) {
         if (event.key === "Right" || event.key === "ArrowRight") {
-            this.isKeyPressed = true;
-            this.x += this.horizontalVelocity
+            const destinationX = this.x + this.horizontalVelocity
+            const smoothRight = () => {
+                if (this.timeout) clearTimeout(this.timeout)
+                this.timeout = setTimeout(() => {
+                    this.x = Lerp({
+                        start: this.x,
+                        end: this.x + this.horizontalVelocity,
+                        amount: 0.5
+                    })
+                    if (this.x < destinationX) smoothRight()
+                    else return
+                }, 60);
+            }
+            smoothRight()
             this.detectCollision()
         }
         if (event.key === "Left" || event.key === "ArrowLeft") {
-            this.isKeyPressed = true;
-            this.x -= this.horizontalVelocity
+            const destinationX = this.x - this.horizontalVelocity
+            const smoothLeft = () => {
+                if (this.timeout) clearTimeout(this.timeout)
+                this.timeout = setTimeout(() => {
+                    this.x = Lerp({
+                        start: this.x,
+                        end: this.x - this.horizontalVelocity,
+                        amount: 0.5
+                    })
+                    if (this.x > destinationX) smoothLeft()
+                    else return
+                }, 60);
+            }
+            smoothLeft()
             this.detectCollision()
         }
     }
