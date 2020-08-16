@@ -65,6 +65,7 @@ export default function Breakout() {
                     const { x, y } = zombie.getPosition()
                     obstacles.move()
                     points++
+                    console.debug(points)
                     if (obstacles.detectCollision({ x, y })) {
                         zombie.dead()
                         obstacles.stop()
