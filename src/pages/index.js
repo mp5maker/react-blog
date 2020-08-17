@@ -3,8 +3,15 @@ import { graphql, useStaticQuery } from 'gatsby'
 
 import { Layout } from 'Components/Layout'
 import { CardCollection } from 'Components/Card/Collection'
+import { useDimension } from 'Hooks/UseDimension'
+import PhoneSvg from 'Svg/Phone/Phone.svg'
 
 export default function Home() {
+  const { width } = useDimension()
+
+  const imageWidth = (20 / 100) * width
+  const imageHeight = (812 / 375) * imageWidth
+
   const data = useStaticQuery(
     graphql`
       query {
@@ -33,6 +40,24 @@ export default function Home() {
     <>
       <Layout page={`Home`}>
         <CardCollection list={data.allMarkdownRemark.edges} />
+        {
+          width > 1440 && (
+            <div
+              style={{
+                position: `fixed`,
+                top: 120,
+                left: `50%`,
+                transform: `translateX(-50%)`
+              }}
+              className="phone-svg-container">
+              <img
+                alt={''}
+                src={PhoneSvg}
+                width={imageWidth}
+                height={imageHeight}/>
+            </div>
+          )
+        }
       </Layout>
     </>
   )
