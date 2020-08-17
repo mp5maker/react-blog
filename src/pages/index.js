@@ -41,7 +41,7 @@ export default function Home() {
       <Layout page={`Home`}>
         <CardCollection list={data.allMarkdownRemark.edges} />
         {
-          width > 1440 && (
+          width >= 1440 && (
             <div
               style={{
                 position: `fixed`,
