@@ -12,13 +12,12 @@ const Container = styled.div`
 const FirstSection = styled.div`
     position: absolute;
     top: 50px;
-    font-family: "Arigatou";
     animation: toRight 1s forwards ease-in-out;
     @keyframes toRight {
         0% {
             left: -1000px;
         } 100% {
-            left: -500px;
+            left: -425px;
         }
     }
 `
@@ -26,7 +25,6 @@ const FirstSection = styled.div`
 const SecondSection = styled.div`
     position: absolute;
     top: 100px;
-    font-family: "Arigatou";
     animation: toleft 1s forwards ease-in-out;
     @keyframes toleft {
         0% {

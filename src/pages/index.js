@@ -8,6 +8,7 @@ import { useDimension } from 'Hooks/UseDimension'
 import { useScroll } from 'Hooks/UseScroll'
 import PhoneSvg from 'Svg/Phone/Phone.svg'
 import { HumanSvg } from 'Svg/Human'
+import { HumanMovieSvg } from 'Svg/Human/Movie'
 
 export default function Home() {
   const { width } = useDimension()
@@ -62,16 +63,41 @@ export default function Home() {
                     width={imageWidth}
                     height={imageHeight} />
                 </div>
-                <div
+              </div>
+              <div
+                style={{
+                  position: `fixed`,
+                  top: 120,
+                  left: `50%`,
+                  transform: `translateX(-50%)`
+                }}
+                className="human-svg-container">
+                <HumanSvg />
+              </div>
+              <div
+                style={{
+                  position: `fixed`,
+                  top: 0,
+                  left: `50%`,
+                  transform: `translateX(-50%)`
+                }}
+                className="human-svg-container">
+                <HumanMovieSvg />
+                <video
+                  playsInline={true}
                   style={{
-                    position: `absolute`,
-                    top: 0,
-                    left: `50%`,
-                    transform: `translateX(-50%)`
+                    position: 'absolute',
+                    left: 0,
+                    top: 120,
+                    height: `100%`,
+                    width: `100%`,
+                    objectFit: `cover`,
+                    clipPath: `url(#svgTextPath)`
                   }}
-                  className="human-svg-container">
-                  <HumanSvg />
-                </div>
+                  loop={true}
+                  muted={true}
+                  autoPlay={true}
+                  src={`/videos/landscape.mp4`} />
               </div>
               <Welcome />
             </>
