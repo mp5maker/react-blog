@@ -69,94 +69,94 @@ export default function ArtsAndPhotography() {
                     <GridSpanTwo>
                         <GridContent>
                             <Image
-                                src="/arts/polygon.jpg"
+                                src="/arts/bengali-word-one.png"
+                                alt="" />
+                        </GridContent>
+                    </GridSpanTwo>
+                    <GridSpanTwo>
+                        <GridContent>
+                            <Image
+                                src="/arts/bengali-word-two.png"
+                                alt="" />
+                        </GridContent>
+                    </GridSpanTwo>
+                    <GridSpanTwo>
+                        <GridContent>
+                            <Image
+                                src="/arts/bengali-word-three.png"
+                                alt="" />
+                        </GridContent>
+                    </GridSpanTwo>
+                    <GridSpanTwo>
+                        <GridContent>
+                            <Image
+                                src="/arts/aristrocat.jpg"
                                 alt="" />
                         </GridContent>
                     </GridSpanTwo>
                     <GridSpanOne>
                         <GridContent>
                             <Image
-                                src="/arts/mantra.jpg"
+                                src="/arts/depression.jpg"
                                 alt="" />
                         </GridContent>
                     </GridSpanOne>
                     <GridSpanTwo>
                         <GridContent>
                             <Image
-                                src="/arts/tribal.jpg"
+                                src="/arts/kid.jpg"
                                 alt="" />
                         </GridContent>
                     </GridSpanTwo>
                     <GridSpanTwo>
                         <GridContent>
                             <Image
-                                src="/arts/polygon.jpg"
-                                alt="" />
-                        </GridContent>
-                    </GridSpanTwo>
-                    <GridSpanTwo>
-                        <GridContent>
-                            <Image
-                                src="/arts/polygon.jpg"
-                                alt="" />
-                        </GridContent>
-                    </GridSpanTwo>
-                    <GridSpanTwo>
-                        <GridContent>
-                            <Image
-                                src="/arts/polygon.jpg"
-                                alt="" />
-                        </GridContent>
-                    </GridSpanTwo>
-                    <GridSpanTwo>
-                        <GridContent>
-                            <Image
-                                src="/arts/tribal.jpg"
+                                src="/arts/pillow.jpg"
                                 alt="" />
                         </GridContent>
                     </GridSpanTwo>
                     <GridSpanOne>
                         <GridContent>
                             <Image
-                                src="/arts/mantra.jpg"
+                                src="/arts/television.jpg"
                                 alt="" />
                         </GridContent>
                     </GridSpanOne>
                     <GridSpanTwo>
                         <GridContent>
                             <Image
-                                src="/arts/polygon.jpg"
+                                src="/arts/bengali-word-three.png"
                                 alt="" />
                         </GridContent>
                     </GridSpanTwo>
                     <GridSpanTwo>
                         <GridContent>
                             <Image
-                                src="/arts/tribal.jpg"
+                                src="/arts/aristrocat.jpg"
                                 alt="" />
                         </GridContent>
                     </GridSpanTwo>
                     <GridSpanTwo>
                         <GridContent>
                             <Image
-                                src="/arts/tribal.jpg"
-                                alt="" />
-                        </GridContent>
-                    </GridSpanTwo>
-                    <GridSpanTwo>
-                        <GridContent>
-                            <Image
-                                src="/arts/polygon.jpg"
+                                src="/arts/bengali-word-two.png"
                                 alt="" />
                         </GridContent>
                     </GridSpanTwo>
                     <GridSpanOne>
                         <GridContent>
                             <Image
-                                src="/arts/mantra.jpg"
+                                src="/arts/depression.jpg"
                                 alt="" />
                         </GridContent>
                     </GridSpanOne>
+                    <GridSpanTwo>
+                        <GridContent>
+                            <Image
+                                src="/arts/kid.jpg"
+                                alt="" />
+                        </GridContent>
+                    </GridSpanTwo>
                 </GridContainer>
             </Layout>
         </>
