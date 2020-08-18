@@ -29,7 +29,7 @@ export const ThreeCarousel = () => {
         '/three-models/dog.glb',
         '/three-models/table.glb',
         '/three-models/ancient-block.glb',
-        '',
+        '/three-models/sword.glb',
         '',
         '',
     ]
