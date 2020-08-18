@@ -9,7 +9,6 @@ import { ThreeBoxGeometry } from 'ThreeJS/Geometry/Box'
 import { ThreeMeshStandardMaterial } from 'ThreeJS/Material/Standard'
 import { ThreeOrbitControls } from 'ThreeJS/Controls/Orbit'
 
-const numberOfItems = 5
 const radius = 12
 
 const Asset = ({ url, ...props }) => {
@@ -26,6 +25,15 @@ const Asset = ({ url, ...props }) => {
 export const ThreeCarousel = () => {
     const colors = useThreeColors()
 
+    const items = [
+        '/three-models/dog.glb',
+        '/three-models/table.glb',
+        '/three-models/ancient-block.glb',
+        '',
+        '',
+        '',
+    ]
+
     return (
         <>
             {
@@ -34,8 +42,8 @@ export const ThreeCarousel = () => {
                         <ThreeAmbientLight args={[colors.primaryColor]} />
                         <ThreeOrbitControls />
                         {
-                            [ ...new Array(numberOfItems)].map((notNeeded, index) => {
-                                const t = (index / numberOfItems) * 2 * Math.PI;
+                            items.map((url, index) => {
+                                const t = (index / items.length) * 2 * Math.PI;
 
                                 const Box = (
                                     <ThreeMesh
@@ -46,38 +54,20 @@ export const ThreeCarousel = () => {
                                     </ThreeMesh>
                                 )
 
-                                if (index === 0) {
-                                    return (
-                                        <React.Fragment key={index}>
-                                            <React.Suspense fallback={Box}>
-                                                <Asset
-                                                    position-z={radius * Math.sin(t)}
-                                                    position-x={radius * Math.cos(t)}
-                                                    url="/three-models/dog.glb" />
-                                            </React.Suspense>
-                                        </React.Fragment>
-                                    )
-                                }
-
-                                if (index === 1) {
-                                    return (
-                                        <React.Fragment key={index}>
-                                            <React.Suspense fallback={Box}>
-                                                <Asset
-                                                    position-z={radius * Math.sin(t)}
-                                                    position-x={radius * Math.cos(t)}
-                                                    url="/three-models/table.glb" />
-                                            </React.Suspense>
-                                        </React.Fragment>
-                                    )
-                                }
-
-                                return (
+                                return url ? (
+                                    <React.Fragment key={index}>
+                                        <React.Suspense fallback={Box}>
+                                            <Asset
+                                                position-z={radius * Math.sin(t)}
+                                                position-x={radius * Math.cos(t)}
+                                                url={url} />
+                                        </React.Suspense>
+                                    </React.Fragment>
+                                ) : (
                                     <React.Fragment key={index}>
                                         { Box }
                                     </React.Fragment>
                                 )
-
                             })
                         }
                     </>
