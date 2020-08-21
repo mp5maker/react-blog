@@ -1,5 +1,9 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
+
+import { RoundButton } from 'Components/Button'
 
 export const RecklessCarousel = ({
     list = [],
@@ -20,15 +24,15 @@ export const RecklessCarousel = ({
         if (onClick) onClick({ event, activeIndex, item })
     }
 
-    const moveLeft = () => {
+    const moveLeft = React.useCallback(() => {
         const shiftTo = currentActiveIndex - 1
         if (currentActiveIndex !== 0) setCurrentActiveIndex(shiftTo)
-    }
+    }, [currentActiveIndex])
 
-    const moveRight = () => {
+    const moveRight = React.useCallback(() => {
         const shiftTo = currentActiveIndex + 1
         if (currentActiveIndex !== list.length - 1) setCurrentActiveIndex(shiftTo)
-    }
+    }, [currentActiveIndex, list])
 
     const prepareItemStyles = ({ index }) => {
         const PREVIOUS_TWO = currentActiveIndex === index - 2
@@ -89,7 +93,7 @@ export const RecklessCarousel = ({
         return {}
     }
 
-    return (
+    const OverflowContent = (
         <>
             {
                 overflowDisplay && (
@@ -117,8 +121,10 @@ export const RecklessCarousel = ({
                                             <div
                                                 style={{
                                                     zIndex,
+                                                    borderRadius: 12,
                                                     height: overflowHeight,
-                                                    backgroundColor: `white`,
+                                                    backgroundColor: `var(--foreground-color)`,
+                                                    color: `var(--primary-color)`,
                                                     transition: `all ease-in-out 0.25s`,
                                                     willChange: `transform`,
                                                     paddingLeft: 6,
@@ -136,6 +142,11 @@ export const RecklessCarousel = ({
                     </div>
                 )
             }
+        </>
+    )
+
+    const CarouselContent = (
+        <>
             <div
                 style={{
                     display: `flex`,
@@ -161,6 +172,7 @@ export const RecklessCarousel = ({
                             return (
                                 <React.Fragment key={index}>
                                     <div
+                                        onKeyDown={() => {}}
                                         onClick={(event) => setActiveIndex({ event, index, item })}
                                         style={{
                                             position: `absolute`,
@@ -179,13 +191,45 @@ export const RecklessCarousel = ({
                     }
                 </div>
             </div>
-            <div>
-                <button onClick={moveLeft}>
-                    Move Left
-                </button>
-                <button onClick={moveRight}>
-                    Move Right
-                </button>
+        </>
+    )
+
+    return (
+        <>
+            <div
+                style={{
+                    position: `relative`
+                }}>
+                { OverflowContent }
+                { CarouselContent }
+                <div className={`custom-carousel-direction-container`}>
+                    <RoundButton
+                        role={`button`}
+                        disabled={currentActiveIndex === 0}
+                        style={{
+                            opacity: currentActiveIndex === 0 ? 0.5 : 1,
+                            position: `absolute`,
+                            top: `calc(50% + 50px)`,
+                            right: 0,
+                            transform: `translateY(-50%)`
+                        }}
+                        onClick={moveLeft}>
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                    </RoundButton>
+                    <RoundButton
+                        role={`button`}
+                        disabled={currentActiveIndex === (list.length - 1)}
+                        style={{
+                            opacity: currentActiveIndex === (list.length - 1) ? 0.5 : 1,
+                            position: `absolute`,
+                            top: `50%`,
+                            right: 0,
+                            transform: `translateY(-50%)`
+                        }}
+                        onClick={moveRight}>
+                        <FontAwesomeIcon icon={faArrowRight} />
+                    </RoundButton>
+                </div>
             </div>
         </>
     )
