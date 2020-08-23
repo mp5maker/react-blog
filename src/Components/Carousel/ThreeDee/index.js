@@ -2,9 +2,14 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { Howl } from 'howler'
 
 import { RoundButton } from 'Components/Button'
 import { useKeyboard } from 'Hooks/UseKeyboard'
+
+const swipeSound = new Howl({
+    src: "/sounds/carousel-slide.mp3"
+})
 
 export const ThreeDeeCarousel = ({
     list = [],
@@ -20,12 +25,18 @@ export const ThreeDeeCarousel = ({
 
     const moveLeft = React.useCallback(() => {
         const shiftTo = currentActiveIndex - 1
-        if (currentActiveIndex !== 0) setCurrentActiveIndex(shiftTo)
+        if (currentActiveIndex !== 0) {
+            swipeSound.play()
+            setCurrentActiveIndex(shiftTo)
+        }
     }, [currentActiveIndex])
 
     const moveRight = React.useCallback(() => {
         const shiftTo = currentActiveIndex + 1
-        if (currentActiveIndex !== list.length - 1) setCurrentActiveIndex(shiftTo)
+        if (currentActiveIndex !== list.length - 1) {
+            swipeSound.play()
+            setCurrentActiveIndex(shiftTo)
+        }
     }, [currentActiveIndex, list])
 
     React.useEffect(() => {
