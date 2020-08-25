@@ -30,7 +30,7 @@ export const ThreeCarousel = () => {
         '/three-models/table.glb',
         '/three-models/ancient-block.glb',
         '/three-models/sword.glb',
-        '',
+        '/three-models/bricks.glb',
         '',
     ]
 
